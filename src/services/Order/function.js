@@ -32,6 +32,8 @@ const getAllOrder = async () => {
 const updateOrderById = async (id, data) => {
   try {
     const dbResponse = await dbServices.Order.updateOrderById(id, data);
+    console.log("REQ : ", data);
+    // console.log("RES : ", dbResponse);
     return dbResponse;
   } catch (err) {
     throw new Error(err);

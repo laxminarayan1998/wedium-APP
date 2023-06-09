@@ -236,6 +236,7 @@ const updateOrder = async (req, res, next) => {
     address: body.address,
     phone: body.phone,
     orderStatus: body.orderStatus,
+    orderDate: body.orderDate,
   })
     .then((data) => {
       if (!data) {
