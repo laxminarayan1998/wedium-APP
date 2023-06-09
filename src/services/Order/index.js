@@ -64,9 +64,9 @@ const createNewOrder = async (req, res, next) => {
       }
       body.vendorData = vendor;
     } 
-    const orderCreatedDate = Date.now();
-    const newDate = moment(orderCreatedDate).format('DD-MM-YYYY');
-    body.orderDate = newDate;
+    // const orderCreatedDate = Date.now();
+    // const newDate = moment(orderCreatedDate).format('DD-MM-YYYY');
+    // body.orderDate = newDate;
     const Order = await createOrders(body);
     res.status(200).json({ data: Order, message: "success" });
   } catch (error) {
