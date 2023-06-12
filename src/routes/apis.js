@@ -1870,6 +1870,8 @@ module.exports = (app) => {
 	app.get('/api/v1/getCustomerPhoneNumber', services.Customer.getCustomerPhoneNumber);
 	app.post('/api/v1/loginVendor', services.Vendor.loginVendor);
 	app.post('/api/v1/order/Complete', services.Order.completeBooking);
+	app.patch('/api/v1/updateCity/:id', services.City.updateCity);
+	app.delete('/api/v1/deleteCity/:id', services.City.deleteCity);
 
 
 	//sns service
