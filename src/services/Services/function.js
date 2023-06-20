@@ -6,6 +6,7 @@ const createServices = async (body) => {
 		const dbResponse = await dbServices.Services.createService(body);
 		return dbResponse;
 	} catch (err) {
+		console.log('ERROR', err);
 		throw new Error(err);
 	}
 };

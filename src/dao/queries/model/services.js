@@ -8,13 +8,20 @@ const categorySchema = new mongoose.Schema({
         type: String,
         trim: true,
         required: [true, 'Please add a service_name'],
-        unique:true,
+        unique: true,
     },
-    image: {
-        type: [String], default: [],
-        required: [true, 'Please add a image'],
-        default: null,
-    },
+    image: [
+        {
+            serial: {
+                type: Number,
+                required: true,
+            },
+            url: {
+                type: String,
+                required: true,
+            },
+        }
+    ],
     absoluteServicePath: {
         type: String,
         default: null,
@@ -29,16 +36,16 @@ const categorySchema = new mongoose.Schema({
     },
     price: {
         type: Number,
-        default: 0
+        default: 0,
     },
     discount: {
         type: Number,
-        default: 0
+        default: 0,
     },
     status: {
         type: String,
         enum: ['ACTIVE', 'INACTIVE'],
-        default: 'INACTIVE'
+        default: 'INACTIVE',
     },
     isBestSeller: {
         type: Boolean,
@@ -46,7 +53,7 @@ const categorySchema = new mongoose.Schema({
     },
     noOfOrders: {
         type: Number,
-        default: 0
+        default: 0,
     },
 }, { timestamps: true });
 
