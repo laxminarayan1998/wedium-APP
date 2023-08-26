@@ -138,29 +138,51 @@ const deleteVendor = async (req, res, next) => {
 };
 
 // delete vendor
+// const loginVendor = async (req, res, next) => {
+//   const email = req.body.email;
+//   const password = req.body.password;
+
+//   await loginVendors(email, password).then((vendor) => {
+//     try {
+//       console.log("logguiiiin  guhgui", vendor);
+//       if (vendor) {
+//         res.status(200).json({
+//           message: "Vendor Found",
+//           data: vendor,
+//         });
+//       } else {
+//         res.status(404).json({
+//           message: "Vendor Not Found",
+//         });
+//       }
+//     } catch (error) {
+//       res.status(error).json({
+//         message: "Error" + error,
+//       });
+//     }
+//   });
+// };
 const loginVendor = async (req, res, next) => {
   const email = req.body.email;
-  const password = req.body.password;
 
-  await loginVendors(email, password).then((vendor) => {
-    try {
-      console.log("logguiiiin  guhgui", vendor);
-      if (vendor) {
-        res.status(200).json({
-          message: "Vendor Found",
-          data: vendor,
-        });
-      } else {
-        res.status(404).json({
-          message: "Vendor Not Found",
-        });
-      }
-    } catch (error) {
-      res.status(error).json({
-        message: "Error" + error,
+  try {
+    const vendor = await loginVendors(email);
+
+    if (vendor && (await bcrypt.compare(req.body.password, vendor.password))) {
+      res.status(200).json({
+        message: "Vendor Found",
+        data: vendor,
+      });
+    } else {
+      res.status(404).json({
+        message: "Vendor Not Found",
       });
     }
-  });
+  } catch (error) {
+    res.status(500).json({
+      message: "Error: " + error,
+    });
+  }
 };
 
 module.exports = {
