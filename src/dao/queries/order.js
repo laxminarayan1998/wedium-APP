@@ -15,6 +15,20 @@ const getOrderByVendorId = async (_id) => {
     orderStatus: { $in: ["OPEN", "PROCESSING", "PENDING"] },
   });
 };
+const getOrderByPhoneNumber = async (phoneNumber) => {
+  console.log("PhoneNumber", phoneNumber);
+
+  // Remove any non-digit characters and keep the last 10 digits
+  const sanitizedPhoneNumber = phoneNumber.replace(/\D/g, "").slice(-10);
+
+  console.log("sanitizedPhoneNumber", sanitizedPhoneNumber);
+
+  return await Order.find({
+    phone: { $regex: sanitizedPhoneNumber },
+    userId: { $exists: false },
+    orderStatus: { $in: ["OPEN", "PROCESSING", "PENDING"] },
+  });
+};
 const completeOrder = async (id) => {
   return await Order.findOne({
     _id: mongoose.Types.ObjectId(id),
@@ -48,4 +62,5 @@ module.exports = {
   getOrderByVendorId,
   getClosedOrderByVendorId,
   completeOrder,
+  getOrderByPhoneNumber,
 };

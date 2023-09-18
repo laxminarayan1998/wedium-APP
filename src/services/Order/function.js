@@ -70,6 +70,16 @@ const getOrdersByUserId = async (id) => {
   }
 };
 
+// get getOrdersByPhoneNumber
+const getOrderByPhoneNumber = async (phoneNumber) => {
+  try {
+    const dbResponse = await dbServices.Order.getOrderByPhoneNumber(phoneNumber);
+    return dbResponse;
+  } catch (err) {
+    throw new Error(err);
+  }
+};
+
 // get getOrderByVendorId +
 const getOrderByVendorId = async (id) => {
   try {
@@ -110,4 +120,5 @@ module.exports = {
   getOrderByVendorId,
   getClosedOrdersByVendorId,
   completeOrder,
+  getOrderByPhoneNumber,
 };
