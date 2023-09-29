@@ -95,7 +95,18 @@ const updateVendor = async (req, res, next) => {
   if (!id.match(/^[0-9a-fA-F]{24}$/)) {
     return res.status(500).json({ message: "Invalid Category id." });
   }
-  await updateVendorById(id, data)
+  // Encrypt user password
+  encryptedPassword = await bcrypt.hash(data.password, 5);
+  const vendor = {
+    name: data.name,
+    email: data.email.toLowerCase(), // sanitize: convert email to lowercase
+    password: encryptedPassword,
+    phone: data.phone,
+    profileImage: data.profileImage,
+    aadharcardupload: data.aadharcardupload,
+    pancardupload: data.pancardupload,
+  };
+  await updateVendorById(id, vendor)
     .then((data) => {
       if (!data) {
         res.status(404).json({
