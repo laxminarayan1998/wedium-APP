@@ -9,11 +9,14 @@ const getAllCustomer = () => Customer.find();
 const updateCustomerByid = (id, data) => Customer.findByIdAndUpdate(id, data);
 const deleteCustomerByid = (id) => Customer.findByIdAndDelete(id);
 const getCustomerPhoneNumber = (phone) =>
-  Order.findOne({
-    phone: { $regex: phone },
-    orderStatus: { $in: ["OPEN", "PENDING", "PROCESSING"] },
-    vendorData: { $exists: true },
-  });
+  {
+    console.log(phone);
+    return Order.findOne({
+      phone: phone,
+      orderStatus: { $in: ["OPEN", "PENDING", "PROCESSING"] },
+      vendorData: { $exists: true },
+    });
+  };
 
 module.exports = {
   createCustomer,
