@@ -62,11 +62,11 @@ getFormattedPhone = (phone) => {
       }
     }
 
-    console.log('CUSTOMER NUMBER', `+91${_ph.split("").reverse().join("")}`);
+    console.log("CUSTOMER NUMBER", `+91${_ph.split("").reverse().join("")}`);
 
     return `+91${_ph.split("").reverse().join("")}`;
   } else {
-    console.error('Invalid phone number: ', phone);
+    console.error("Invalid phone number: ", phone);
     return "Invalid phone number";
   }
 };
@@ -80,11 +80,15 @@ const getCustomerPhoneNumber = async (req, res, next) => {
 
   getCustomersPhoneNumber(getFormattedPhone(vendorPhone)).then(
     async (order) => {
+      const phone = getFormattedPhone(order.vendorData.phone);
+
       try {
         if (order != null) {
-          res
-            .status(200)
-            .json(getFormattedPhone(order.vendorData.phone));
+          res.status(200).send({
+            destination: {
+              numbers: [phone],
+            },
+          });
         } else {
           res.status(404).json({ message: "order not found" });
         }
