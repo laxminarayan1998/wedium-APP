@@ -80,9 +80,8 @@ const getCustomerPhoneNumber = async (req, res, next) => {
 
   getCustomersPhoneNumber(getFormattedPhone(vendorPhone)).then(
     async (order) => {
-      const phone = getFormattedPhone(order.vendorData.phone);
-
       try {
+        const phone = getFormattedPhone(order.vendorData.phone);
         if (order != null) {
           res.status(200).send({
             destination: {
