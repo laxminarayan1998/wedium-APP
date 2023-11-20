@@ -83,12 +83,7 @@ const getCustomerPhoneNumber = async (req, res, next) => {
       try {
         const phone = getFormattedPhone(order.vendorData.phone);
         if (order != null) {
-          res.status(200).send({
-            destination: {
-              numbers: [phone],
-            },
-            outgoing_phone_number: "080-711-75896"
-          });
+          res.status(200).send(phone);
         } else {
           res.status(404).json({ message: "order not found" });
         }
