@@ -87,6 +87,7 @@ const getCustomerPhoneNumber = async (req, res, next) => {
             destination: {
               numbers: [phone],
             },
+            record: true,
           });
         } else {
           res.status(404).json({ message: "order not found" });
