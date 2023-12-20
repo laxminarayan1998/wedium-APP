@@ -47,7 +47,7 @@ const getCompletedOrdersByUserId = async (id) =>
     userId: id,
     orderStatus: { $in: ["COMPLETED", "CANCELED"] },
   });
-const getAllOrder = () => Order.find();
+const getAllOrder = () => Order.find().limit(20);
 const updateOrderById = (id, data) => Order.findByIdAndUpdate(id, data);
 const deleteOrderById = (id) => Order.findByIdAndDelete(id);
 
