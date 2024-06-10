@@ -1873,6 +1873,8 @@ module.exports = (app) => {
 	app.post('/api/v1/order/Complete', services.Order.completeBooking);
 	app.patch('/api/v1/updateCity/:id', services.City.updateCity);
 	app.delete('/api/v1/deleteCity/:id', services.City.deleteCity);
+
+	app.get('/api/v1/getPromoCodeList', services.PromoCode.getPromoCodeList);
 	// update
 
 
