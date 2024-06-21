@@ -28,12 +28,12 @@ const getOrderByid = async (id) => {
 //     throw new Error(err);
 //   }
 // };
-const getAllOrder = async (limit = 20, offset = 0) => {
+const getAllOrder = async () => {
   try {
-    const dbResponse = await dbServices.Order.getAllOrder(limit, offset);
+    const dbResponse = await dbServices.Order.getAllOrder();
     return dbResponse;
   } catch (err) {
-    throw new Error(err);
+    throw new Error(err.message);
   }
 };
 
