@@ -58,7 +58,10 @@ app.use(express.urlencoded({  extended: true }));
 app.get('/', (req, res) => {
     res.render('index')
 });
-
+require('./src/routes/apis')(app);
+// Payment routes
+const paymentRoutes = require('./src/routes/apis');
+app.use('/payment', paymentRoutes);
 require('./src/routes/apis')(app);
 
 app.get('*', (req, res) => res.status(404).json({ error: 'API not found.' }));
