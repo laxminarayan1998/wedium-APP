@@ -1862,6 +1862,11 @@ module.exports = (app) => {
 *       404:
 *         description: The City was not found
 */
+
+    app.get('/api/v1/getOrderList', services.Order.getOrderList);
+    app.post('/api/v1/create_order', services.Payment.createPaymentOrderHandler);
+
+
 	app.get('/api/v1/FindOneCity/:id', services.City.FindOneCity);
 	app.get('/api/v1/getOrdersByUserId/:id', services.Order.getOrderByUserId);
 	app.get('/api/v1/getOrderByUserPhoneNumber/:id', services.Order.getOrderByUserPhoneNumber);
