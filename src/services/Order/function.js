@@ -20,12 +20,20 @@ const getOrderByid = async (id) => {
   }
 };
 // get All Orders +
-const getAllOrder = async () => {
+// const getAllOrder = async () => {
+//   try {
+//     const dbResponse = await dbServices.Order.getAllOrder();
+//     return dbResponse;
+//   } catch (err) {
+//     throw new Error(err);
+//   }
+// };
+const getAllOrder = async (limit = 20, offset = 0) => {
   try {
-    const dbResponse = await dbServices.Order.getAllOrder();
+    const dbResponse = await dbServices.Order.getAllOrder(limit, offset);
     return dbResponse;
   } catch (err) {
-    throw new Error(err.message);
+    throw new Error(err);
   }
 };
 
