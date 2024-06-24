@@ -17,6 +17,24 @@ const createPaymentOrder = async (paymentData) => {
     }
 };
 
+const checkOrderStatus = async (client_txn_id, key) => {
+    try {
+        const response = await axios.post('https://app.misscallpay.com/api/check_order_status', {
+            key: key,
+            client_txn_id: client_txn_id
+        }, {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        return response.data;
+    } catch (error) {
+        throw new Error(error.response ? error.response.data : error.message);
+    }
+};
+
 module.exports = {
-    createPaymentOrder
+    createPaymentOrder,
+    checkOrderStatus
 };

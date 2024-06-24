@@ -20,6 +20,16 @@ const createPaymentOrder = async (paymentData, key) => {
     return response.data;
 };
 
+const getPaymentByClientTxnId = async (client_txn_id) => {
+    try {
+        const payment = await Payment.findOne({ client_txn_id });
+        return payment;
+    } catch (error) {
+        throw new Error(`Error fetching payment by client transaction ID: ${error.message}`);
+    }
+};
+
 module.exports = {
-    createPaymentOrder
+    createPaymentOrder,
+    getPaymentByClientTxnId
 };

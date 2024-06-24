@@ -31,15 +31,12 @@ const paymentSchema = new mongoose.Schema({
     },
     udf1: {
         type: String,
-        required: false,
     },
     udf2: {
         type: String,
-        required: false,
     },
     udf3: {
         type: String,
-        required: false,
     },
     status: {
         type: String,
