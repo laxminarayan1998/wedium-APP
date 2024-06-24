@@ -17,10 +17,12 @@ const createPaymentOrder = async (paymentData) => {
     }
 };
 
-const checkOrderStatus = async (client_txn_id, key) => {
+const checkOrderStatus = async (client_txn_id) => {
     try {
+        const apiKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZXJjaGFudF9pZCI6IlBSSVlBTktBMTIzIiwiaWF0IjoxNzE0OTk1MDUzLCJleHAiOjE3MjI3NzEwNTN9.iBV6gbt1053yj-pyQtnPsrxLndXgDpO3_iK1MNHEGLc"; // Replace with your actual API key
+        
         const response = await axios.post('https://app.misscallpay.com/api/check_order_status', {
-            key: key,
+            key: apiKey,
             client_txn_id: client_txn_id
         }, {
             headers: {
