@@ -22,11 +22,6 @@ const createPaymentOrder = async (paymentData, key) => {
 
 const getPaymentByClientTxnId = async (key, client_txn_id, txn_date) => {
     try {
-        const payment = await Payment.findOne({ client_txn_id, txn_date });
-        if (!payment) {
-            throw new Error('Payment not found');
-        }
-
         const response = await axios.post('https://app.misscallpay.com/api/check_order_status', {
             key: key,
             client_txn_id: client_txn_id,

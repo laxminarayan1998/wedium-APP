@@ -1,8 +1,8 @@
-const { createPaymentOrder, checkOrderStatus } = require('./function');
+const { createPaymentOrder } = require('./function');
+const { checkOrderStatus } = require('./function');
 
-// Handler to create a payment order
 const createPaymentOrderHandler = async (req, res, next) => {
-    const { client_txn_id, amount, p_info, customer_name, customer_email, customer_mobile, redirect_url, udf1, udf2, udf3, key } = req.body;
+    const { client_txn_id, amount, p_info, customer_name, customer_email, customer_mobile, redirect_url, udf1, udf2, udf3 } = req.body;
 
     try {
         const response = await createPaymentOrder({
@@ -16,7 +16,7 @@ const createPaymentOrderHandler = async (req, res, next) => {
             udf1,
             udf2,
             udf3
-        }, key);
+        });
 
         res.status(200).json(response);
     } catch (error) {
@@ -25,7 +25,6 @@ const createPaymentOrderHandler = async (req, res, next) => {
     }
 };
 
-// Handler to check the order status
 const checkOrderStatusHandler = async (req, res, next) => {
     const { key, client_txn_id, txn_date } = req.body;
 
