@@ -23,7 +23,8 @@ const checkOrderStatus = async (client_txn_id) => {
         
         const response = await axios.post('https://app.misscallpay.com/api/check_order_status', {
             key: apiKey,
-            client_txn_id: client_txn_id
+            client_txn_id: client_txn_id,
+            txn_date:txn_date
         }, {
             headers: {
                 'Content-Type': 'application/json'
