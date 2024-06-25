@@ -25,12 +25,14 @@ const createPaymentOrderHandler = async (req, res, next) => {
         next(error);
     }
 };
-
 const checkOrderStatusHandler = async (req, res, next) => {
-    const { key, client_txn_id, txn_date } = req.body;
+    const {key, client_txn_id, txn_date} = req.body;
 
     try {
-        const response = await checkOrderStatus(key, client_txn_id, txn_date);
+        const response = await checkOrderStatus({
+            key, client_txn_id, txn_date
+        });
+
         res.status(200).json(response);
     } catch (error) {
         res.status(500).json({ error: error.message });

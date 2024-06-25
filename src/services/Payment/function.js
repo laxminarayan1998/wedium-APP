@@ -15,18 +15,10 @@ const createPaymentOrder = async (paymentData) => {
         throw new Error(error.response ? error.response.data : error.message);
     }
 };
-
-const checkOrderStatus = async (key, client_txn_id, txn_date) => {
+const checkOrderStatus = async (paymentStatus) => {
     try {
-        const payment = await Payment.findOne({ client_txn_id, txn_date });
-        if (!payment) {
-            throw new Error('Payment not found');
-        }
-
         const response = await axios.post('https://app.misscallpay.com/api/check_order_status', {
-            key: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZXJjaGFudF9pZCI6IlBSSVlBTktBMTIzIiwiaWF0IjoxNzE0OTk1MDUzLCJleHAiOjE3MjI3NzEwNTN9.iBV6gbt1053yj-pyQtnPsrxLndXgDpO3_iK1MNHEGLc",
-            client_txn_id: client_txn_id,
-            txn_date: txn_date
+           ...paymentStatus
         }, {
             headers: {
                 'Content-Type': 'application/json'
@@ -35,7 +27,7 @@ const checkOrderStatus = async (key, client_txn_id, txn_date) => {
 
         return response.data;
     } catch (error) {
-        throw new Error(`Error fetching payment by client transaction ID: ${error.message}`);
+        throw new Error(error.response ? error.response.data : error.message);
     }
 };
 
