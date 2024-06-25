@@ -1,9 +1,14 @@
 const axios = require('axios');
+const Payment = require('./model/payment');
 
-const createPaymentOrder = async (paymentData) => {
+// Function to create a payment order
+const createPaymentOrder = async (paymentData, key) => {
     try {
+        const payment = new Payment(paymentData);
+        await payment.save();
+
         const response = await axios.post('https://app.misscallpay.com/api/create_order', {
-            key: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZXJjaGFudF9pZCI6IlBSSVlBTktBMTIzIiwiaWF0IjoxNzE0OTk1MDUzLCJleHAiOjE3MjI3NzEwNTN9.iBV6gbt1053yj-pyQtnPsrxLndXgDpO3_iK1MNHEGLc",
+            key: key,
             ...paymentData
         }, {
             headers: {
@@ -11,12 +16,16 @@ const createPaymentOrder = async (paymentData) => {
             }
         });
 
+        payment.status = response.data.status ? 'PENDING' : 'FAILED';
+        await payment.save();
+
         return response.data;
     } catch (error) {
         throw new Error(error.response ? error.response.data : error.message);
     }
 };
 
+// Function to check the order status
 const checkOrderStatus = async (key, client_txn_id, txn_date) => {
     try {
         const payment = await Payment.findOne({ client_txn_id, txn_date });
@@ -25,7 +34,7 @@ const checkOrderStatus = async (key, client_txn_id, txn_date) => {
         }
 
         const response = await axios.post('https://app.misscallpay.com/api/check_order_status', {
-            key: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZXJjaGFudF9pZCI6IlBSSVlBTktBMTIzIiwiaWF0IjoxNzE0OTk1MDUzLCJleHAiOjE3MjI3NzEwNTN9.iBV6gbt1053yj-pyQtnPsrxLndXgDpO3_iK1MNHEGLc",
+            key: key,
             client_txn_id: client_txn_id,
             txn_date: txn_date
         }, {
