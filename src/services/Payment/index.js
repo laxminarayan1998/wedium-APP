@@ -30,7 +30,9 @@ const checkOrderStatusHandler = async (req, res, next) => {
 
     try {
         const response = await checkOrderStatus({
-            key, client_txn_id, txn_date
+            key, 
+            client_txn_id, 
+            txn_date
         });
 
         res.status(200).json(response);
