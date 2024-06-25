@@ -6,7 +6,6 @@ const createPaymentOrder = async (paymentData, key) => {
     await payment.save();
 
     const response = await axios.post('https://app.misscallpay.com/api/create_order', {
-        key: key,
         ...paymentData
     }, {
         headers: {
