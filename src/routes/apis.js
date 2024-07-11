@@ -1882,7 +1882,7 @@ module.exports = (app) => {
 	app.post('/api/v1/users/verifyOTP', services.User.verifyOTP);
 
 	app.get('/api/v1/getPromoCodeList', services.PromoCode.getPromoCodeList);
-	app.post('/api/v1/createPromoCode', promoCodeController.createPromoCode);
+	app.post('/api/v1/createPromoCode', services.PromoCode.createPromoCode);
 	// update
 
     app.post('/api/v1/create_order', services.Payment.createPaymentOrderHandler);
