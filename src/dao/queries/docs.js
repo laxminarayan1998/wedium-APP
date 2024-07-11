@@ -1,9 +1,9 @@
 const docs = require("./model/docs");
 const mongoose = require("mongoose");
 
-const getAllDocument = async () => await promoCode.find();
+const getAllDocument = async () => await docs.find();
 
 
 module.exports = {
-    getAllPromoCode
+    getAllDocument
   };
