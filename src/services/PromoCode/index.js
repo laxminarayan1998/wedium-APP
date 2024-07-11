@@ -20,8 +20,16 @@ const getPromoCodeList = async (req, res, next) => {
 // Create PromoCode
 const createPromoCode = async (req, res, next) => {
   try {
-    const promoCodeData = req.body; // Assuming you're sending data in the request body
-    const newPromoCode = await createPromoCodefunction(promoCodeData);
+    const body = req.body;
+
+    // Validate input
+    if (!body.code || !body.expiry || !body.discount) {
+      return res.status(400).json({ message: "Code, expiry, and discount are required" });
+    }
+
+    // Create PromoCode in the database
+    const newPromoCode = await createPromoCodefunction(body);
+
     res.status(201).json({
       data: newPromoCode,
       success: true,
@@ -29,12 +37,11 @@ const createPromoCode = async (req, res, next) => {
     });
   } catch (err) {
     res.status(500).json({
-      message: err.message || "Error occurred while creating PromoCode",
+      message: "Error creating PromoCode",
     });
     next(err);
   }
 };
-
 module.exports = {
   getPromoCodeList,
   createPromoCode,

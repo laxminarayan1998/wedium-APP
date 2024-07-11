@@ -2,17 +2,17 @@ const mongoose = require("mongoose");
 
 const promoCodeSchema = new mongoose.Schema(
   {
-    userId: {
-      type: String,
-      allowNull: true,
-    },
     code: {
       type: String,
-      allowNull: true,
+      required: true,
+    },
+    expiry: {
+      type: Date,
+      required: true,
     },
     discount: {
-      type: Number, 
-      required: true, 
+      type: Number,
+      required: true,
     },
   },
   { timestamps: true }
