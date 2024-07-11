@@ -6,8 +6,8 @@ const getAllPromoCode = async () => await promoCode.find();
 
 const createPromoCode = async (promoCodeData) => {
   try {
-    const promoCode = new PromoCode(promoCodeData);
-    return await promoCode.save();
+    const dbResponse = await PromoCode.create(promoCodeData); // Using PromoCode.create for simplicity
+    return dbResponse;
   } catch (err) {
     throw new Error(`Error saving promo code: ${err.message}`);
   }

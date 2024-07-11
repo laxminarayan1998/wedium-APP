@@ -30,9 +30,6 @@ const createPromoCode = async (req, res, next) => {
       return res.status(400).json({ message: "Code, expiry, and discount are required" });
     }
 
-    // Log the received data
-    console.log("Received data for creating PromoCode:", body);
-
     // Create PromoCode in the database
     const newPromoCode = await createPromoCodefunction(body);
 
@@ -50,6 +47,7 @@ const createPromoCode = async (req, res, next) => {
     next(err);
   }
 };
+
 module.exports = {
   getPromoCodeList,
   createPromoCode
