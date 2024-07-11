@@ -1,4 +1,4 @@
-const { getAllPromoCode } = require("../PromoCode/function");
+const { getAllPromoCode,createPromoCodefunction } = require("../PromoCode/function");
 
 // retrieve and return all PromoCode
 const getPromoCodeList = async (req, res, next) => {
