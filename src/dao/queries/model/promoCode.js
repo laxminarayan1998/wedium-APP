@@ -5,7 +5,6 @@ const promoCodeSchema = new mongoose.Schema(
     userId: {
       type: String,
       allowNull: true,
-      // required: [true, 'Please add a serviceId.'],
     },
     code: {
       type: String,
@@ -15,7 +14,6 @@ const promoCodeSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-//we need to create collection
-const PromoCode = mongoose.model("promoCode", promoCodeSchema);
+const PromoCode = mongoose.model("PromoCode", promoCodeSchema);
 
 module.exports = PromoCode;

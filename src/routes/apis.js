@@ -1864,8 +1864,6 @@ module.exports = (app) => {
 */
 
 
-    app.post('/api/v1/create_order', services.Payment.createPaymentOrderHandler);
-	app.post('/api/v1/check_order_status', services.Payment.checkOrderStatusHandler);
 
     app.get('/api/v1/getOrderList', services.Order.getOrderList);
 	app.get('/api/v1/FindOneCity/:id', services.City.FindOneCity);
@@ -1880,12 +1878,17 @@ module.exports = (app) => {
 	app.patch('/api/v1/updateCity/:id', services.City.updateCity);
 	app.delete('/api/v1/deleteCity/:id', services.City.deleteCity);
 
-	app.get('/api/v1/getPromoCodeList', services.PromoCode.getPromoCodeList);
-	// update
-
-
 	//sns service
 	app.post('/api/v1/users/verifyOTP', services.User.verifyOTP);
+
+	app.get('/api/v1/getPromoCodeList', services.PromoCode.getPromoCodeList);
+	app.post('/api/v1/createPromoCode', promoCodeController.createPromoCode);
+	// update
+
+    app.post('/api/v1/create_order', services.Payment.createPaymentOrderHandler);
+	app.post('/api/v1/check_order_status', services.Payment.checkOrderStatusHandler);
+
+
 
 
 };
