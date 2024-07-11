@@ -1885,6 +1885,9 @@ module.exports = (app) => {
 	app.post('/api/v1/createPromoCode', services.PromoCode.createPromoCode);
 	// update
 
+	
+	app.get('/api/v1/getDocumentList', services.Docs.getDocumentList);
+
     app.post('/api/v1/create_order', services.Payment.createPaymentOrderHandler);
 	app.post('/api/v1/check_order_status', services.Payment.checkOrderStatusHandler);
 

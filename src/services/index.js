@@ -11,6 +11,7 @@ const Customer = require('./Customer');
 const Store = require('./Store');
 const City = require('./City');
 const Payment = require('./Payment');
+const Docs = require('./Docs');
 
 module.exports = {
     categories,
@@ -25,5 +26,6 @@ module.exports = {
     Customer,
     Store,
     City,
-    Payment
+    Payment,
+    Docs
 };
