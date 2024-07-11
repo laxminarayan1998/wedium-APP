@@ -3,8 +3,11 @@ const promoCode = require("./model/promoCode");
 const mongoose = require("mongoose");
 
 const getAllPromoCode = async () => await promoCode.find();
-const createPromoCode = (promoCodeData) => promoCode.create(promoCodeData);
 
+const createPromoCode = async (promoCodeData) => {
+  const promoCode = new PromoCode(promoCodeData);
+  return await promoCode.save();
+};
 module.exports = {
     getAllPromoCode,
     createPromoCode,
