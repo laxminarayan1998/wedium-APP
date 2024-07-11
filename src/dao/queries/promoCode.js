@@ -7,7 +7,6 @@ const createPromoCode = async (promoCodeData) => {
   const promoCode = new PromoCode(promoCodeData);
   return await promoCode.save();
 };
-
 module.exports = {
     getAllPromoCode,
     createPromoCode,

@@ -10,6 +10,10 @@ const promoCodeSchema = new mongoose.Schema(
       type: String,
       allowNull: true,
     },
+    discount: {
+      type: Number, 
+      required: true, 
+    },
   },
   { timestamps: true }
 );
