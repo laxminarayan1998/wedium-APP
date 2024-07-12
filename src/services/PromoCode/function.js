@@ -13,7 +13,7 @@ const getAllPromoCode = async () => {
   // Create PromoCode
 const createPromoCodefunction = async (promoCodeData) => {
   try {
-    const dbResponse = await dbServices.createPromoCode(promoCodeData);
+    const dbResponse = await dbServices.PromoCode.createPromoCode(promoCodeData)
     return dbResponse;
   } catch (err) {
     throw new Error(err);
