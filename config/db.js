@@ -1,4 +1,6 @@
 const mongoose = require("mongoose");
+const admin = require("firebase-admin");
+const serviceAccount = require("./wedium-admin-firebase-adminsdk-av6bq-6e638b1c31.json");
 
 let client;
 
@@ -15,6 +17,23 @@ const connectDB = async () => {
   }
 };
 
+const connectFirebase = async () => {
+  try {
+    admin.initializeApp({
+      credential: admin.credential.cert(serviceAccount),
+      databaseURL: "https://wedium-admin.firebaseapp.com",
+    });
+
+    console.log(`Successfully connected to Firebase`);
+
+    // const user = await admin.auth().getUser("CRqu3eMhJ5cbZp0dE5omcX0owJ32");
+    // console.log("Firebase connected successfully. User data:", user.toJSON());
+  } catch (err) {
+    console.log(`Failed to connect to Firebase: ` + err);
+    process.exit(1);
+  }
+};
+
 const getClient = () => {
   if (!client) {
     throw new Error("MongoDB client not initialized. Call connectDB first.");
@@ -22,4 +41,4 @@ const getClient = () => {
   return client;
 };
 
-module.exports = { connectDB, getClient };
+module.exports = { connectDB, getClient, connectFirebase };

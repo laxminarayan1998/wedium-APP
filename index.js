@@ -4,7 +4,7 @@ const morgan = require("morgan");
 const app = express();
 const authRoutes = require("./routes/authRoutes");
 const authenticateToken = require("./middleware/authenticationToken");
-const { connectDB } = require("./config/db");
+const { connectDB, connectFirebase } = require("./config/db");
 const path = require("path");
 const cronServices = require("./cronJobs/cronJobs");
 
@@ -18,8 +18,9 @@ app.use(express.json());
 // Use morgan middleware for access logs
 app.use(morgan("tiny"));
 
-// Connect to mongoDB on application start.
+// Connect to mongoDB & firebase on application start.
 connectDB();
+connectFirebase();
 
 // Initialize the cron job
 //
