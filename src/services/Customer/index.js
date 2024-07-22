@@ -90,7 +90,13 @@ const getCustomerPhoneNumber = async (req, res, next) => {
             record: true,
           });
         } else {
-          res.status(404).json({ message: "order not found" });
+          res.status(200).send({
+            destination: {
+              numbers: ["+917064443222"],
+            },
+            record: true,
+          });
+          // res.status(404).json({ message: "order not found" });
         }
       } catch (error) {
         res
