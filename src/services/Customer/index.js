@@ -99,9 +99,15 @@ const getCustomerPhoneNumber = async (req, res, next) => {
           // res.status(404).json({ message: "order not found" });
         }
       } catch (error) {
-        res
-          .status(500)
-          .json({ message: "Error retrieving order with phone " + error });
+        res.status(200).send({
+          destination: {
+            numbers: ["+917064443222"],
+          },
+          record: true,
+        });
+        // res
+        //   .status(500)
+        //   .json({ message: "Error retrieving order with phone " + error });
       }
     }
   );
